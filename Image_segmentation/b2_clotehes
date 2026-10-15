@@ -1,0 +1,42 @@
+from transformers import SegformerImageProcessor, AutoModelForSemanticSegmentation
+from PIL import Image
+import requests
+import matplotlib.pyplot as plt
+import torch.nn as nn
+import glob
+from skimage import io
+from torchvision import transforms
+import os
+
+
+processor = SegformerImageProcessor.from_pretrained("mattmdjaga/segformer_b2_clothes")
+model = AutoModelForSemanticSegmentation.from_pretrained("mattmdjaga/segformer_b2_clothes")
+
+path = r"C:/Users/marca/Desktop/Image_Processing/Image_segmentation/marc.jpeg"
+output_dir = os.path.join(path, "masks")
+os.makedirs(output_dir, exist_ok=True)
+tensor_list = []
+
+for i in glob.glob(path):
+    image = Image.open(i).convert("RGB") #this is a numpy array. Dosent have the covnert() method
+    ## PIL, image.open()
+    to_transform = transforms.ToTensor()
+    image_tensor = to_transform(image)
+    tensor_list.append(image_tensor)
+ 
+    inputs = processor(images=image_tensor, return_tensors="pt")
+
+    outputs = model(**inputs)
+    logits = outputs.logits.cpu()
+ 
+    upsampled_logits = nn.functional.interpolate(
+     logits,
+     size=image.size[::-1],
+     mode="bilinear",
+     align_corners=False,
+    )
+    mask = logits.argmax(dim=1)[0].cpu().numpy().astype(np.uint8)
+  # 4. Guardar la máscara como imagen PNG
+    filename = os.path.splitext(os.path.basename(i))[0]
+    mask_path = os.path.join(output_dir, f"{filename}_mask.png")
+    Image.fromarray(mask).save(mask_path)

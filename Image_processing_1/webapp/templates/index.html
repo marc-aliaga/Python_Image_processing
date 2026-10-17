@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Image Processing</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Image Processing</h1>
+      <p>Sube una foto y el algoritmo la procesará.</p>
+    </header>
+
+    <form id="form">
+      <label id="drop" class="drop">
+        <input id="file" type="file" name="image" accept="image/*" hidden>
+        <span id="drop-text">Arrastra una imagen aquí o <u>haz clic para elegir</u></span>
+      </label>
+      <button id="submit" type="submit" disabled>Procesar</button>
+    </form>
+
+    <p id="status" class="status" role="status"></p>
+
+    <section class="results">
+      <figure>
+        <figcaption>Original</figcaption>
+        <div class="frame"><img id="input-img" alt=""></div>
+      </figure>
+      <figure>
+        <figcaption>Resultado</figcaption>
+        <div class="frame"><img id="output-img" alt=""></div>
+        <a id="download" class="download" download="resultado.png" hidden>Descargar resultado</a>
+      </figure>
+    </section>
+  </main>
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>

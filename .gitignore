@@ -1,0 +1,6 @@
+# Carpetas de imágenes
+Image_segmentation/imagenes/
+Propietary_images/*.czi
+
+# Python
+__pycache__/

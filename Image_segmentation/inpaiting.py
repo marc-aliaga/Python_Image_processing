@@ -47,25 +47,22 @@ pipe = AutoPipelineForInpainting.from_pretrained(
 
 # 5. Prompts
 prompt = (
-    "masterpiece, best quality, adult woman, "
-    "natural medium-sized breasts without a bra, "
-    "realistic anatomy, natural body proportions, "
-    "matching skin tone and texture, consistent lighting and shadows, "
-    "seamless masked-area replacement, photorealistic details, "
-    "preserve original body proportions, preserve original composition, "
-    "preserve all unmasked areas, sharp focus, crisp details, "
-    "original image resolution, no blur"
+    "nude woman, completely bare upper torso, "
+    "natural bare breasts, realistic natural nipples and areolas, "
+    "exact same skin tone as the rest of the body, "
+    "matching original skin color perfectly, warm natural skin tone, "
+    "realistic skin, natural breast shape, "
+    "matching lighting and shadows, seamless photorealistic inpainting, "
+    "high detail, sharp focus"
 )
 
 negative_prompt = (
-    "low quality, blurry, out of focus, loss of detail, "
-    "bad anatomy, deformed body, oversized breasts, exaggerated proportions, "
-    "unnatural shape, distorted torso, mismatched skin tone, "
-    "inconsistent lighting, harsh shadows, visible mask edges, "
-    "seams, halos, artifacts, warped contours, "
-    "changes outside masked area, altered pose, "
-    "changed body proportions, modified background, "
-    "oversmoothing, pixelation"
+    "clothing, shirt, top, bra, lingerie, fabric, straps, "
+    "pasties, nipple covers, solid color, "
+    "pale skin, white skin, chalky skin, gray skin, ashy skin, "
+    "mismatched skin tone, different skin color, "
+    "plastic skin, doll-like, unnatural color, "
+    "blurry, artifacts, visible seams, halos"
 )
 # 6. Match each original with its mask
 mask_extensions = [".png", ".jpg", ".jpeg", ".webp"]
@@ -116,8 +113,10 @@ for index, original_path in enumerate(original_paths, start=1):
                 mask_image=mask,
                 width=width,
                 height=height,
-                num_inference_steps=30,
-                guidance_scale=7.0,
+                num_inference_steps=40,
+                guidance_scale=6.5,
+                strength=0.7, #
+                padding_mask_crop=34,
             ).images[0]
 
         output_path = output_folder / f"{original_path.stem}_result.png"

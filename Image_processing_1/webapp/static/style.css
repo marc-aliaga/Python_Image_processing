@@ -1,0 +1,90 @@
+:root {
+  --bg: #f6f7f9;
+  --surface: #ffffff;
+  --text: #1c1f24;
+  --muted: #646b76;
+  --border: #d9dde3;
+  --accent: #2f6fed;
+  --error: #c62f2f;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #14161a;
+    --surface: #1d2025;
+    --text: #e8eaed;
+    --muted: #9aa1ab;
+    --border: #353a42;
+    --accent: #6c9bff;
+    --error: #ff7070;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 16px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+main { max-width: 1000px; margin: 0 auto; padding: 32px 16px; }
+
+h1 { margin: 0 0 4px; font-size: 1.75rem; }
+header p { margin: 0 0 24px; color: var(--muted); }
+
+form { display: flex; gap: 12px; flex-wrap: wrap; }
+
+.drop {
+  flex: 1 1 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 96px;
+  padding: 16px;
+  border: 2px dashed var(--border);
+  border-radius: 10px;
+  background: var(--surface);
+  color: var(--muted);
+  text-align: center;
+  cursor: pointer;
+}
+.drop.over, .drop:hover { border-color: var(--accent); }
+
+button {
+  padding: 0 28px;
+  min-height: 48px;
+  border: 0;
+  border-radius: 10px;
+  background: var(--accent);
+  color: #fff;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+button:disabled { opacity: .45; cursor: not-allowed; }
+
+.status { min-height: 1.5em; color: var(--muted); }
+.status.error { color: var(--error); }
+
+.results { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media (max-width: 640px) { .results { grid-template-columns: 1fr; } }
+
+figure { margin: 0; }
+figcaption { font-weight: 600; margin-bottom: 8px; }
+
+.frame {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 4 / 3;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.frame img { max-width: 100%; max-height: 100%; object-fit: contain; }
+.frame img:not([src]) { display: none; }
+
+.download { display: inline-block; margin-top: 8px; color: var(--accent); }

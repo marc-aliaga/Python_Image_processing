@@ -1,0 +1,16 @@
+__pycache__
+*.pyc
+*.pyo
+.env
+.venv
+venv
+.git
+.gitignore
+*.md
+masks/
+results/
+imagenes/
+hf_cache/
+*.png
+*.jpg
+*.jpeg

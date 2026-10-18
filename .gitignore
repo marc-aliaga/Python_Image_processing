@@ -4,3 +4,9 @@ Propietary_images/*.czi
 
 # Python
 __pycache__/
+
+# Docker
+[Dd]ockerfile
+
+# Caché de Hugging Face
+hf_cache/

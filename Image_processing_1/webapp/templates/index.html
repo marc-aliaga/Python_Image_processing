@@ -21,6 +21,7 @@
       <button id="submit" type="submit" disabled>Procesar</button>
     </form>
 
+    <div id="progress" class="progress" hidden><div class="progress-bar"></div></div>
     <p id="status" class="status" role="status"></p>
 
     <section class="results">
@@ -30,7 +31,7 @@
       </figure>
       <figure>
         <figcaption>Resultado</figcaption>
-        <div class="frame"><img id="output-img" alt=""></div>
+        <div id="output-frame" class="frame"><img id="output-img" alt=""><div class="spinner"></div></div>
         <a id="download" class="download" download="resultado.png" hidden>Descargar resultado</a>
       </figure>
     </section>

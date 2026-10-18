@@ -5,9 +5,9 @@ import requests
 from flask import Flask, jsonify, render_template, request, send_file
 
 # URL del servicio en la nube que ejecuta el algoritmo, p. ej. https://mi-api.com/process
-ALGORITHM_URL = os.environ.get("ALGORITHM_URL")
+ALGORITHM_URL = "http://localhost:8000/process"
 ALGORITHM_API_KEY = os.environ.get("ALGORITHM_API_KEY")  # opcional
-ALGORITHM_TIMEOUT = float(os.environ.get("ALGORITHM_TIMEOUT", "120"))  # segundos
+ALGORITHM_TIMEOUT = float(os.environ.get("ALGORITHM_TIMEOUT", "700"))  # segundos
 
 app = Flask(__name__)
 app.config["MAX_CONTENT_LENGTH"] = 15 * 1024 * 1024  # 15 MB upload limit

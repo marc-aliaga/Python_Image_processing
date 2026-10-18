@@ -7,12 +7,20 @@ const statusEl = document.getElementById("status");
 const inputImg = document.getElementById("input-img");
 const outputImg = document.getElementById("output-img");
 const download = document.getElementById("download");
+const progress = document.getElementById("progress");
+const outputFrame = document.getElementById("output-frame");
 
 let selectedFile = null;
 
 function setStatus(msg, isError = false) {
   statusEl.textContent = msg;
   statusEl.classList.toggle("error", isError);
+}
+
+function setLoading(on) {
+  progress.hidden = !on;
+  outputFrame.classList.toggle("loading", on);
+  outputFrame.setAttribute("aria-busy", on);
 }
 
 function selectFile(file) {
@@ -48,6 +56,7 @@ form.addEventListener("submit", async (e) => {
   data.append("image", selectedFile);
 
   submitBtn.disabled = true;
+  setLoading(true);
   setStatus("Procesando…");
   try {
     const res = await fetch("/process", { method: "POST", body: data });
@@ -65,6 +74,7 @@ form.addEventListener("submit", async (e) => {
   } catch (err) {
     setStatus(err.message, true);
   } finally {
+    setLoading(false);
     submitBtn.disabled = false;
   }
 });

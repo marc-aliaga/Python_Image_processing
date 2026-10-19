@@ -5,6 +5,12 @@ IMG_WIDTH = 128
 IMG_HEIGHT = 128
 IMG_CHANNELS = 3
 
+#inputs
+input_dir = "images/"
+target_dir = "annotations/trimaps/"
+
+
+
 #imput layer
 
 inputs = tf.keras.layers.Input((IMG_WIDTH, IMG_HEIGHT,IMG_CHANNELS))
@@ -72,6 +78,17 @@ model = tf.keras.Model(inputs=[inputs], outputs=[outputs])
 model.compile(optimizer="adam", loss="binary_crossentropy", metrics=["accuracy"])
 model.summary()
 
+
+###CALLBACKS
+#checkpoint
+checkpointer = tf.keras.callbacks.ModelCheckpoint("model,h5", verbose =1, save_best_only=True)
+
+callbacks = [
+    tf.keras.callbacks.EarlyStopping(patience=2, monitor="val_loss"),
+    tf.keras.callbacks.TensorBoard(log_dir = "logs")]
+
+
+results = model.fit(X,Y, validation_split=0.1, batch_size=16, epochs=25,callbacks=callbacks)
 
 
 

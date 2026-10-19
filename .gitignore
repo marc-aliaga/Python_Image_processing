@@ -1,6 +1,9 @@
 # Carpetas de imágenes
 Image_segmentation/imagenes/
 Propietary_images/*.czi
+CNN/U-NET(Segmentation)/images
+CNN/U-NET(Segmentation)/annotations
+
 
 # Python
 __pycache__/
@@ -10,3 +13,6 @@ __pycache__/
 
 # Caché de Hugging Face
 hf_cache/
+
+# Trabajos temporales de la webapp
+Image_processing_1/webapp/jobs/
